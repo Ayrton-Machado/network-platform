@@ -11,15 +11,21 @@
         {% if posts %}
             <div id="posts_index">
                 {% for post in posts %}
-                    <div class="card" style="margin: 1vh 0 0 0; width: 100%;">
+                    <div class="card" style="margin-top: 1vh; width: 100%;">
                         <div class="card-body">
                             <h5 class="card-title">{{ post.username }}</h5>
                             {% if user == post.username %}
                                 <a href="#" class="card-link">Edit</a>
                             {% endif %}
-                            <h6 class="card-subtitle mb-2 text-body-secondary"> {{ post.content|slice:":30" }} </h6>
-                            <p class="card-text"> {{ post.create_at|date:"Y-m-d H:i" }} </p>
-                            <a href="#" class="card-link">Comment</a>
+                            <h6 class="card-subtitle mb-2 text-body-secondary"> {{ post.content|slice:":60" }}... </h6>
+                            <p class="card-text"> {{ post.created_at|date:"Y-m-d H:i" }} </p>
+                            <button class="like-btn">
+                                <i class="fa-regular fa-heart"></i>
+                                <span id="like_qtd">0</span>
+                            </button>
+                            <a href="#" class="card-link">
+                                <p>Comment</p>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}

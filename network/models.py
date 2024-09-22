@@ -12,3 +12,4 @@ class Post(models.Model):
 
     def __str__(self):
         return f'Username: {self.username}\nContent: {self.content}\n{self.created_at}'
+

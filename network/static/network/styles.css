@@ -14,10 +14,18 @@ body {
     height: 23vh;
 }
 
+.new-post-area label {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 700;
+}
+
 .form-control {
     border-radius: 15px;
 }
 
+/* post submit button */
 .btn {
     margin-top: 1vh;
     height: 4.5vh;
@@ -27,17 +35,16 @@ body {
     border-radius: 15px;
 }
 
-.new-post-area label {
-    display: flex;
-    justify-content: center;
-    font-size: 25px;
-    font-weight: 700;
-}
-
-/* post box */
+/* post cards */
 #posts_index {
     display: flex;
     flex-direction: column;
     height: 60vh;
     width: 95vw;
+}
+
+.like-btn {
+    all: unset;
+
+    cursor: pointer;
 }

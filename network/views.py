@@ -8,8 +8,14 @@ from .models import User, Post
 
 def index(request):
     return render(request, "network/index.html", {
-        "posts": Post.objects.all(),
+        "posts": Post.objects.all().order_by('-created_at'),
         "user": request.user
+    })
+
+def load_profile(request, username):
+    
+    return render(request, 'network/profile.html', {
+        "profile": User.objects.get(username=username)
     })
 
 def submit_post(request):
