@@ -1,5 +1,29 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    TODO
+    {% if user.is_authenticated %}
+        <form action="{% url 'post' %}" method="post" class="mb-3 new-post-area">
+            {% csrf_token %}
+            <label for="exampleFormControlTextarea1" class="form-label">New Post</label>
+            <textarea name="post_content" placeholder="Como foi seu dia?" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <button type="submit" class="btn btn-warning">Post</button>
+        </form>
+        {% if posts %}
+            <div id="posts_index">
+                {% for post in posts %}
+                    <div class="card" style="margin: 1vh 0 0 0; width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.username }}</h5>
+                            {% if user == post.username %}
+                                <a href="#" class="card-link">Edit</a>
+                            {% endif %}
+                            <h6 class="card-subtitle mb-2 text-body-secondary"> {{ post.content|slice:":30" }} </h6>
+                            <p class="card-text"> {{ post.create_at|date:"Y-m-d H:i" }} </p>
+                            <a href="#" class="card-link">Comment</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
 {% endblock %}

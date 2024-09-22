@@ -1,0 +1,43 @@
+body {
+    height: 100vh;
+    margin: 0 2vh;
+
+    overflow: hidden;
+}
+
+.new-post-area {
+    background-color: rgba(156, 156, 156, 0.685);
+
+    border-radius: 15px;
+    padding: 20px;
+    margin: 2vw;
+    height: 23vh;
+}
+
+.form-control {
+    border-radius: 15px;
+}
+
+.btn {
+    margin-top: 1vh;
+    height: 4.5vh;
+    width: 7vw;
+    color: rgb(58, 58, 58);
+    font-weight: 500;
+    border-radius: 15px;
+}
+
+.new-post-area label {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+/* post box */
+#posts_index {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    width: 95vw;
+}
