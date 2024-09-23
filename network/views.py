@@ -13,18 +13,32 @@ def index(request):
     })
 
 def load_profile(request, username):
+    user = User.objects.get(username=username)
     
     return render(request, 'network/profile.html', {
-        "profile": User.objects.get(username=username)
+        "profile": user,
+        "posts": user.posts.all(),
+        "followers": user.followers.all()
     })
+
+def follow(request, username):
+    user = User.objects.get(username=username)
+    current_user = request.user
+
+    if current_user in user.followers.all():
+        current_user.following.remove(user)
+        return HttpResponseRedirect(reverse('profile', kwargs={'username': username}))
+    
+    current_user.following.add(user)
+    return HttpResponseRedirect(reverse('profile', kwargs={'username': username}))
 
 def submit_post(request):
     if request.method == "POST":
 
-        username = request.user
+        user = request.user
         content = request.POST["post_content"]
 
-        Post(username=username, content=content).save()
+        Post(user=user, content=content).save()
         return HttpResponseRedirect(reverse("index"))
 
 def login_view(request):

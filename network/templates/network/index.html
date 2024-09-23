@@ -13,8 +13,8 @@
                 {% for post in posts %}
                     <div class="card" style="margin-top: 1vh; width: 100%;">
                         <div class="card-body">
-                            <h5 class="card-title">{{ post.username }}</h5>
-                            {% if user == post.username %}
+                            <h5 class="card-title">{{ post.user.username }}</h5>
+                            {% if user.username == post.user.username %}
                                 <a href="#" class="card-link">Edit</a>
                             {% endif %}
                             <h6 class="card-subtitle mb-2 text-body-secondary"> {{ post.content|slice:":60" }}... </h6>

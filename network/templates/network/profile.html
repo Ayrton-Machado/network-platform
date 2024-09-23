@@ -1,11 +1,67 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
+<div class="container text-center">
 
-<h1>AAAAAAAAAAA</h1>
-<h1>{{ profile.username }}</h1>
-<h1>{{ profile.email }}</h1>
-<h3>{{ profile.last_login }}</h3>
-<h3>{{ profile.date_joined }}</h3>
+    <!-- TODO: Inserir foto ao cadastrar -->
+    <!--<img src="minha-foto.jpg" alt="Minha foto" class="rounded-circle mb-3"> -->
+    <h1 class="mb-3">{{ profile.username }}</h1>
+
+    <div class="mb-3">
+        <i class="fa-solid fa-users me-2"></i> Seguidores: <span data-set="followers-count">{{ profile.followers.count }}</span>
+        <i class="fa-solid fa-user-plus me-2"></i> Seguindo: <span data-set="following-count">{{ profile.following.count }}</span>
+    </div>
+    
+    <!-- TODO: Inserir adição de bio -->
+    <p>Sua breve descrição</p>
+    
+    {% if profile == user %}
+    <!-- TODO: Edit -->
+    <a href="" class="btn btn-outline-success me-2">Edit</a>
+    <!-- TODO: Share -->
+    <a href="#" class="btn btn-outline-success">Share Profile</a>
+    {% else %}
+        {% if user not in followers %}
+        <a href="{% url 'follow' profile.username%}" class="btn btn-outline-success me-2">Seguir</a>
+        {% else %}
+        <a href="{% url 'follow' profile.username%}" class="btn btn-outline-success me-2">DeSeguir</a>
+        {% endif %}
+    <!-- TODO: Message -->
+    <a href="#" class="btn btn-outline-success">Message</a>
+    {% endif %}
+
+
+    <div class="mb-3">
+        <i class="fa-solid fa-clock me-2"></i> Último login: <span id="last-login">{{ profile.last_login }}</span>
+    </div>
+    <div class="mb-3">
+        <i class="fa-solid fa-calendar-day me-2"></i> Criado em: <span id="created-at">{{ profile.date_joined }}</span>
+    </div>
+</div>
+
+    {% if posts %}
+    <div id="posts_index">
+        {% for post in posts %}
+        <div class="card" style="margin-top: 1vh; width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.user.username }}</h5>
+                {% if user.username == post.user.username %}
+                <a href="#" class="card-link">Edit</a>
+                {% endif %}
+                <h6 class="card-subtitle mb-2 text-body-secondary"> {{ post.content|slice:":60" }}... </h6>
+                <p class="card-text"> {{ post.created_at|date:"Y-m-d H:i" }} </p>
+                <button class="like-btn">
+                    <i class="fa-regular fa-heart"></i>
+                    <span id="like_qtd">0</span>
+                </button>
+                <a href="#" class="card-link">
+                    <p>Comment</p>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
 
 {% endblock %}
