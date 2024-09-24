@@ -1,0 +1,12 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+<div class="container">
+    <h1>Following</h1>
+    <ul class="following-list">
+        {% for follow in user_following %}
+        <li><a href="{% url 'profile' follow.username %}">{{ follow.username }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

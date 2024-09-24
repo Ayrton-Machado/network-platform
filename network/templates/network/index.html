@@ -4,7 +4,7 @@
     {% if user.is_authenticated %}
         <form action="{% url 'post' %}" method="post" class="mb-3 new-post-area">
             {% csrf_token %}
-            <label for="exampleFormControlTextarea1" class="form-label">New Post</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Network</label>
             <textarea name="post_content" placeholder="Como foi seu dia?" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             <button type="submit" class="btn btn-warning">Post</button>
         </form>

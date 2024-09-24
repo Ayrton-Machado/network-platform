@@ -1,12 +1,14 @@
 body {
+    background-color: #a1a1a1;
+    color: #333;
+
+
     height: 100vh;
     margin: 0 2vh;
-
-    overflow: hidden;
 }
 
 .new-post-area {
-    background-color: rgba(156, 156, 156, 0.685);
+    background-color: #ff910000;
 
     border-radius: 15px;
     padding: 20px;
@@ -17,6 +19,7 @@ body {
 .new-post-area label {
     display: flex;
     justify-content: center;
+    color: #8400b8;
     font-size: 25px;
     font-weight: 700;
 }
@@ -27,11 +30,13 @@ body {
 
 /* post submit button */
 .btn {
+    background-color: #ff9100;
     margin-top: 1vh;
     height: 4.5vh;
     width: 7vw;
     color: rgb(58, 58, 58);
-    font-weight: 500;
+    font-weight: 700;
+    border: 0;
     border-radius: 15px;
 }
 
@@ -40,11 +45,46 @@ body {
     display: flex;
     flex-direction: column;
     height: 60vh;
-    width: 95vw;
+    width: 98vw;
 }
 
 .like-btn {
     all: unset;
 
     cursor: pointer;
+}
+
+/* Following css */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.following-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.following-list li {
+    margin-bottom: 10px;
+}
+
+.following-list a {
+    text-decoration: none;
+    color: #ff9100;
+    font-size: 18px;
+}
+
+.following-list a:hover {
+    text-decoration: underline;
 }

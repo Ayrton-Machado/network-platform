@@ -12,12 +12,19 @@ def index(request):
         "user": request.user
     })
 
+def load_following(request):
+    user = request.user
+
+    return render(request, "network/following.html", {
+        "user_following": user.following.all()
+    })
+
 def load_profile(request, username):
     user = User.objects.get(username=username)
     
     return render(request, 'network/profile.html', {
         "profile": user,
-        "posts": user.posts.all(),
+        "posts": user.posts.all().order_by('-created_at'),
         "followers": user.followers.all()
     })
 
