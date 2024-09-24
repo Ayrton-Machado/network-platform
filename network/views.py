@@ -4,12 +4,21 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from django.core.paginator import Paginator
+from django.shortcuts import render
 from .models import User, Post
 
 def index(request):
+    posts = Post.objects.all().order_by('-created_at')
+    paginator = Paginator(posts, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "network/index.html", {
-        "posts": Post.objects.all().order_by('-created_at'),
-        "user": request.user
+        "posts": posts,
+        "user": request.user,
+        "page_obj": page_obj
     })
 
 def load_following(request):

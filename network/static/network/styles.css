@@ -7,6 +7,19 @@ body {
     margin: 0 2vh;
 }
 
+.card-title {
+    color: black;
+    width: max-content;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-title:hover {
+    text-decoration: none;
+    color: black;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 .new-post-area {
     background-color: #ff910000;
 
