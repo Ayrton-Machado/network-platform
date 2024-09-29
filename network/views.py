@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import User, Post
@@ -20,6 +22,16 @@ def index(request):
         "user": request.user,
         "page_obj": page_obj
     })
+
+@csrf_exempt
+def edit_post(request, post_id):
+    if request.method == "POST":
+        post = Post.objects.get(id=post_id)
+        content_edited = request.POST[f"edit_post{post_id}"]
+
+        post.content = content_edited
+        post.save()
+        return JsonResponse({'success': True, 'new_content': post.content})
 
 def load_following(request):
     user = request.user

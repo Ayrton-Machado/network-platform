@@ -16,9 +16,17 @@
 
                             <h5 class="card-title"><a class="card-title" href="{% url 'profile' post.user.username %}">{{ post.user.username }}</a></h5>
                             {% if user.username == post.user.username %}
-                                <a href="#" class="card-link">Edit</a>
+                                <button class="edit_post card-link" data-post-id="{{ post.id }}">Edit</button>
                             {% endif %}
-                            <h6 class="card-subtitle mb-2 text-body-secondary"> {{ post.content|slice:":60" }}... </h6>
+                            <div id="content-area">
+                                <h6 id="content_post{{ post.id }}" class="card-subtitle mb-2 text-body-secondary"> {{ post.content }}... </h6>
+                                <div id="edit_form_{{ post.id }}" class="edit_form hidden">
+                                    <form id="edit_form" data-post-id="{{ post.id }}" action="{% url 'edit_post' post.id %}" method="POST">
+                                        <textarea name="edit_post{{ post.id }}" placeholder="Editing..." class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <button id="apply_edit_{{ post.id }}" class="btn" type="submit">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
                             <p class="card-text"> {{ post.created_at|date:"Y-m-d H:i" }} </p>
                             <button class="like-btn">
                                 <i class="fa-regular fa-heart"></i>

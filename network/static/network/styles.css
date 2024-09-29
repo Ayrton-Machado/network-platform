@@ -101,3 +101,52 @@ h1 {
 .following-list a:hover {
     text-decoration: underline;
 }
+
+/* Pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.step_links a {
+    color: white;
+    background-color: #8400b8;
+    padding: 10px 15px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.step_links a:hover {
+    background-color: #ff9100;
+}
+
+.current {
+    color: #8400b8;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.pagination a:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.pagination a:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.step_links a:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+}
+
+.hidden {
+    display: none;
+}
