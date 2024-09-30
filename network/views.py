@@ -42,11 +42,17 @@ def load_following(request):
 
 def load_profile(request, username):
     user = User.objects.get(username=username)
+    posts = user.posts.all().order_by('-created_at')
+
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     
     return render(request, 'network/profile.html', {
         "profile": user,
-        "posts": user.posts.all().order_by('-created_at'),
-        "followers": user.followers.all()
+        "posts": posts,
+        "followers": user.followers.all(),
+        "page_obj": page_obj
     })
 
 def follow(request, username):

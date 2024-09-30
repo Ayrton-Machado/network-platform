@@ -1,0 +1,64 @@
+/* Create Post */
+.new-post-area {
+    background-color: #ff910000;
+
+    border-radius: 15px;
+    padding: 20px;
+    margin: 2vw;
+    height: 23vh;
+}
+
+.new-post-area label {
+    display: flex;
+    justify-content: center;
+    color: #8400b8;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.form-control {
+    border-radius: 15px;
+}
+
+/* post submit button */
+.btn {
+    background-color: #ff9100;
+    margin-top: 1vh;
+    height: 4.5vh;
+    width: 7vw;
+    color: rgb(58, 58, 58);
+    font-weight: 700;
+    border: 0;
+    border-radius: 15px;
+}
+
+/* post cards */
+#posts_index {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    width: 98vw;
+}
+
+.card-title {
+    color: black;
+    width: max-content;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-title:hover {
+    text-decoration: none;
+    color: black;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.edit-post {
+    margin: 1vh 0;
+}
+
+.like-btn {
+    all: unset;
+
+    cursor: pointer;
+}

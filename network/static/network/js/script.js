@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('AAAAAAA');
     const allForms = document.querySelectorAll('#edit_form');
     allForms.forEach(form => {
         form.onsubmit = (event) => {
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             
             console.log(post_id);
-            fetch(`edit/${post_id}`, {
+            fetch(`/edit/${post_id}`, {
                 method: "POST",
                 body: form_data,
             })
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.success) {
                     console.log(data, data.new_content)
                     document.querySelector(`#content_post${post_id}`).innerHTML = data.new_content + '...'
+                    document.querySelector(`#edit_form_${post_id}`).classList.add('hidden')
                 } 
             })
         };
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function post_edit_box() {
 
-    const edit_buttons = document.querySelectorAll('.edit_post')
+    const edit_buttons = document.querySelectorAll('.edit-post')
     edit_buttons.forEach(button => {
         button.addEventListener('click', () => {
             const postID = button.getAttribute("data-post-id");

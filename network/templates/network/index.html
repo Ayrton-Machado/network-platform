@@ -16,7 +16,7 @@
 
                             <h5 class="card-title"><a class="card-title" href="{% url 'profile' post.user.username %}">{{ post.user.username }}</a></h5>
                             {% if user.username == post.user.username %}
-                                <button class="edit_post card-link" data-post-id="{{ post.id }}">Edit</button>
+                                <button class="edit-post card-link" data-post-id="{{ post.id }}">Edit</button>
                             {% endif %}
                             <div id="content-area">
                                 <h6 id="content_post{{ post.id }}" class="card-subtitle mb-2 text-body-secondary"> {{ post.content }}... </h6>
