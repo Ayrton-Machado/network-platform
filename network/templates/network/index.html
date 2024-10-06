@@ -28,13 +28,17 @@
                                 </div>
                             </div>
                             <p class="card-text"> {{ post.created_at|date:"Y-m-d H:i" }} </p>
-                            <button class="like-btn">
-                                <i class="fa-regular fa-heart"></i>
-                                <span id="like_qtd">0</span>
-                            </button>
-                            <a href="#" class="card-link">
-                                <p>Comment</p>
-                            </a>
+                            <form id="like_submit" data-post-id="{{ post.id }}" action="{% url 'like_post' post.id %}" method="POST">
+                                <button id="like_btn{{ post.id }}" class="like-btn">
+                                    {% if post.user_has_liked %}
+                                        <i id="like_icon{{ post.id }}" class="fa-solid fa-heart"></i>
+                                    {% else %}
+                                        <i id="like_icon{{ post.id }}" class="fa-regular fa-heart"></i>
+                                    {% endif %}
+                                    <span id="like_qtd{{ post.id }}">{{ post.like.count }}</span>
+                                </button>
+                            </form>
+                            <a href="#" class="card-link"><p>Comment</p></a>
                         </div>
                     </div>
                 {% endfor %}

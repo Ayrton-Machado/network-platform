@@ -12,8 +12,9 @@ from .models import User, Post
 
 def index(request):
     posts = Post.objects.all().order_by('-created_at')
+    for post in posts:
+        post.user_has_liked = post.like.filter(id=request.user.id).exists(); 
     paginator = Paginator(posts, 10)
-
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -23,15 +24,6 @@ def index(request):
         "page_obj": page_obj
     })
 
-@csrf_exempt
-def edit_post(request, post_id):
-    if request.method == "POST":
-        post = Post.objects.get(id=post_id)
-        content_edited = request.POST[f"edit_post{post_id}"]
-
-        post.content = content_edited
-        post.save()
-        return JsonResponse({'success': True, 'new_content': post.content})
 
 def load_following(request):
     user = request.user
@@ -54,26 +46,6 @@ def load_profile(request, username):
         "followers": user.followers.all(),
         "page_obj": page_obj
     })
-
-def follow(request, username):
-    user = User.objects.get(username=username)
-    current_user = request.user
-
-    if current_user in user.followers.all():
-        current_user.following.remove(user)
-        return HttpResponseRedirect(reverse('profile', kwargs={'username': username}))
-    
-    current_user.following.add(user)
-    return HttpResponseRedirect(reverse('profile', kwargs={'username': username}))
-
-def submit_post(request):
-    if request.method == "POST":
-
-        user = request.user
-        content = request.POST["post_content"]
-
-        Post(user=user, content=content).save()
-        return HttpResponseRedirect(reverse("index"))
 
 def login_view(request):
     if request.method == "POST":
@@ -99,6 +71,48 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
+#APIs
+@csrf_exempt
+def like_post(request, post_id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=post_id)
+        if post.like.filter(id=request.user.id).exists():
+            post.like.remove(request.user)
+            post.save()
+            return JsonResponse({'success': False, 'likes': post.like.count()})
+        post.like.add(request.user)
+        post.save()
+        return JsonResponse({'success': True, 'likes': post.like.count()})
+
+@csrf_exempt
+def edit_post(request, post_id):
+    if request.method == "POST":
+        post = Post.objects.get(id=post_id)
+        content_edited = request.POST[f"edit_post{post_id}"]
+
+        post.content = content_edited
+        post.save()
+        return JsonResponse({'success': True, 'new_content': post.content})
+
+def follow(request, username):
+    user = User.objects.get(username=username)
+    current_user = request.user
+
+    if current_user in user.followers.all():
+        current_user.following.remove(user)
+        return HttpResponseRedirect(reverse('profile', kwargs={'username': username}))
+    
+    current_user.following.add(user)
+    return HttpResponseRedirect(reverse('profile', kwargs={'username': username}))
+
+def submit_post(request):
+    if request.method == "POST":
+
+        user = request.user
+        content = request.POST["post_content"]
+
+        Post(user=user, content=content).save()
+        return HttpResponseRedirect(reverse("index"))
 
 def register(request):
     if request.method == "POST":

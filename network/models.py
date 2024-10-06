@@ -12,7 +12,8 @@ class Post(models.Model):
     user = models.ForeignKey(User, related_name="posts",on_delete=models.CASCADE)
     content = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+    like = models.ManyToManyField(User)
 
     def __str__(self):
-        return f'Username: {self.user}\nContent: {self.content}\n{self.created_at}'
+        return f'ID: {self.id}\nUsername: {self.user}\nContent: {self.content}\n{self.created_at}'
 
