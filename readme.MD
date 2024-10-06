@@ -5,6 +5,8 @@ CS50’s [Web Programming with Python and JavaScript](https://cs50.harvard.edu/w
 ## Project description
 Design a Twitter-like social network website for making posts and following users.
 
+Distribution code from https://cdn.cs50.net/web/2020/spring/projects/4/network.zip and unzip it.
+
 ## git clone https://github.com/Ayrton-Machado/network
 
 ## How to run
@@ -33,6 +35,6 @@ Using Python, JavaScript, HTML, and CSS, complete the implementation of a social
 - [X] Edit Post: Users should be able to click an “Edit” button or link on any of their own posts to edit that post.
     - [X] When a user clicks “Edit” for one of their own posts, the content of their post should be replaced with a textarea where the user can edit the content of their post.
     - [X] The user should then be able to “Save” the edited post. Using JavaScript, you should be able to achieve this without requiring a reload of the entire page.
-    - [] For security, ensure that your application is designed such that it is not possible for a user, via any route, to edit another user’s posts.
-- [] “Like” and “Unlike”: Users should be able to click a button or link on any post to toggle whether or not they “like” that post.
-    - [] Using JavaScript, you should asynchronously let the server know to update the like count (as via a call to fetch) and then update the post’s like count displayed on the page, without requiring a reload of the entire page.
+    - [X] For security, ensure that your application is designed such that it is not possible for a user, via any route, to edit another user’s posts.
+- [X] “Like” and “Unlike”: Users should be able to click a button or link on any post to toggle whether or not they “like” that post.
+    - [X] Using JavaScript, you should asynchronously let the server know to update the like count (as via a call to fetch) and then update the post’s like count displayed on the page, without requiring a reload of the entire page.
