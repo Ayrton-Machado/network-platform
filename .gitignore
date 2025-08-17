@@ -1,2 +1,6 @@
 **/__pychache__
 .pytest_cache
+db.sqlite3
+venv
+env
+.venv
